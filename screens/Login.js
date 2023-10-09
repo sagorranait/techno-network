@@ -13,6 +13,7 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   heading: {
+    fontFamily: 'Poppins-Regular',
 		fontSize: 30
 	}
 });
