@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import Navigation from './navigation';
 
 export default function App() {
+  const [fontLoaded, setFontLoaded] = useState(false);
   
   useEffect(() => {
     // Load the custom font asynchronously
@@ -14,10 +16,15 @@ export default function App() {
         'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
         'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
       });
+      setFontLoaded(true);
     }
 
     loadFont();
   }, []);
+
+  if (!fontLoaded) {
+    return <View />;
+  }
 
   return (
     <>
