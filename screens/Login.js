@@ -1,9 +1,12 @@
-import { View, Text, Image, StyleSheet, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, TextInput, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import FONTS from '../constants/fonts'
-import { COLORS } from '../constants';
+import { useNavigation } from '@react-navigation/native';
+import { COLORS, FONTS } from '../constants';
+import Button from '../components/Button';
 
 export default function Login() {
+  const navigation = useNavigation();
+
   const onLogin = () => {}
 
   return (
@@ -34,6 +37,22 @@ export default function Login() {
               placeholder="Phone Number"
               keyboardType="numeric"
             />
+          </View>
+          <Button label='LOGIN'/>
+          <View style={styles.bottomArea}>
+            <Text style={styles.bottomText}>
+              Don’t have an account? 
+            </Text>  
+            <Pressable onPress={() => navigation.navigate('register')} >
+              <Text 
+                style={[
+                  styles.bottomText, 
+                  { color: COLORS.primary, textDecorationLine: 'underline',}
+                ]} 
+              >
+                Create an account
+              </Text>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -93,5 +112,17 @@ const styles = StyleSheet.create({
     paddingBottom: 5, 
     borderBottomWidth: 1, 
     borderBottomColor: COLORS.gray
+  },
+  bottomArea: { 
+    marginTop: 65,
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    flexDirection: 'row', 
+    gap: 3, 
+  },
+  bottomText:{
+    fontFamily: FONTS.Poppins,
+    fontSize: 14,
+    textAlign: 'center',
   }
 });
