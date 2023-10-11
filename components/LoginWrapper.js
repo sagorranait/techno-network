@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, FONTS } from '../constants';
@@ -9,40 +9,44 @@ export default function LoginWrapper({ children, inputTitle, }) {
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.gradings}>
-            Welcome{route.name === 'login' ? ' Back' : ''},
-          </Text>
-          <Image
-            source={require('../assets/logo.png')}
-            style={styles.logo}
-          />
-          <Text style={styles.logoText}>Techno EDGE Network Solution</Text>
-          <Text style={styles.subTitle}>24/7 WiFi Connection</Text>
-        </View>
-        <View style={styles.inputArea}> 
-          <Text style={styles.inputTitle}>{inputTitle}</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.gradings}>
+              Welcome{route.name === 'login' ? ' Back' : ''},
+            </Text>
+            <Image
+              source={require('../assets/logo.png')}
+              style={styles.logo}
+            />
+            <Text style={styles.logoText}>Techno EDGE Network Solution</Text>
+            <Text style={styles.subTitle}>24/7 WiFi Connection</Text>
+          </View>
+          <View style={{ paddingTop: route.name === 'login' ? 50 : 30, }}> 
+            <Text style={styles.inputTitle}>{inputTitle}</Text>
 
-          { children }
+            { children }
 
-          <View style={styles.bottomArea}>
-            <Text style={styles.bottomText}>
-              { route.name === 'login' ? 'Don’t have an account?' : 'Already have an account?' }              
-            </Text>  
-            <Pressable onPress={() => navigation.navigate('register')} >
-              <Text 
-                style={[
-                  styles.bottomText, 
-                  { color: COLORS.primary, textDecorationLine: 'underline',}
-                ]} 
+            <View style={styles.bottomArea}>
+              <Text style={styles.bottomText}>
+                { route.name === 'login' ? 'Don’t have an account?' : 'Already have an account?' }              
+              </Text>  
+              <Pressable 
+                onPress={() => navigation.navigate(route.name === 'login' ? 'register' : 'login')} 
               >
-                { route.name === 'login' ? 'Create an account' : 'Login' }                
-              </Text>
-            </Pressable>
+                <Text 
+                  style={[
+                    styles.bottomText, 
+                    { color: COLORS.primary, textDecorationLine: 'underline',}
+                  ]} 
+                >
+                  { route.name === 'login' ? 'Create an account' : 'Login' }                
+                </Text>
+              </Pressable>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -69,13 +73,10 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Poppins,
     fontSize: 20
   },
-  inputArea: {
-    paddingTop: 50
-  },
   inputTitle: {
     fontFamily: FONTS.Poppins,
     fontSize: 15,
-    paddingBottom: 15
+    paddingBottom: 20
   },
   bottomArea: { 
     marginTop: 65,

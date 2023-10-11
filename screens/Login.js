@@ -2,8 +2,10 @@ import { View, Text, Image, StyleSheet, TextInput } from 'react-native';
 import LoginWrapper from '../components/LoginWrapper';
 import { COLORS, FONTS } from '../constants';
 import Button from '../components/Button';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
+  const navigation = useNavigation();
   const onLogin = () => {}
 
   return (
@@ -25,7 +27,7 @@ export default function Login() {
           keyboardType="numeric"
         />
       </View>
-      <Button label='LOGIN'/>
+      <Button label='LOGIN' onPress={()=>navigation.navigate('drawer')} />
     </LoginWrapper>
   )
 }

@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import LoginWrapper from '../components/LoginWrapper'
 import { COLORS, FONTS } from '../constants';
 import Button from '../components/Button';
@@ -10,6 +11,22 @@ export default function Register() {
     <LoginWrapper
       inputTitle='Even though registration just takes a few seconds, You have full control over your purchase.'
     >
+      <View style={[styles.inputContainer, styles.inputBorder, { marginBottom: 15, }]}>
+        <View style={styles.inputContainer}>
+          <Icon
+            name='user-circle-o'
+            size={40}
+            color={COLORS.primary}
+            style={{ marginRight: 8, marginBottom: 4,}}
+          />
+        </View>
+        <TextInput
+          style={[styles.inputLogoText, styles.numberInput]}
+          onChangeText={onPhoneNumber}
+          placeholder="Full Name"
+          autoCapitalize='words'
+        />
+      </View>
       <View style={[styles.inputContainer, styles.inputBorder]}>
         <View style={styles.inputContainer}>
           <Image
@@ -25,7 +42,7 @@ export default function Register() {
           keyboardType="numeric"
         />
       </View>
-      <Button label='REGISTER'/>
+      <Button label='REGISTER' />
     </LoginWrapper>
   )
 }
@@ -52,6 +69,6 @@ const styles = StyleSheet.create({
   inputBorder: { 
     paddingBottom: 5, 
     borderBottomWidth: 1, 
-    borderBottomColor: COLORS.gray
+    borderBottomColor: COLORS.gray,
   }
 });
